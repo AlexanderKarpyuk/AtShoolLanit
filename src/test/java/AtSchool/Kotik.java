@@ -87,7 +87,7 @@ public class Kotik {
         new Kotik(3, 4, "Мурзик", "Мяу").liveAnotherDay();
     }
 
-    public void liveAnotherDay() {
+    private void liveAnotherDay() {
         for (int i = 0; i < 24; i++) {
             int random = (int) (Math.random() * 5) + 1;
             switch (random) {
@@ -114,14 +114,14 @@ public class Kotik {
         }
     }
 
-    public void eat() {
+    private void eat() {
         int randomHunger = (int) (Math.random() * 3 + 1);
         int randomFood = (int)(Math.random() * 3);
         System.out.println(name + " ест " + foods[randomFood]);
         eat(randomHunger, foods[randomFood]);
     }
 
-    public void eat(int hunger) {
+    private void eat(int hunger) {
         this.hunger += hunger;
     }
 
