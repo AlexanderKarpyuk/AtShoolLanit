@@ -39,6 +39,9 @@ public class Kotik {
     int weight;
     String name;
     String meow;
+    private int hunger;
+    private boolean isHunger;
+    String[] foods = new String[] {"KittyCat", "Колбаску", "Сыр"};
 
     //Конструктор без параметров, он идентичен конструктору по умолчанию, 
     //который сюда бы подставила Java,    
@@ -47,8 +50,13 @@ public class Kotik {
     public Kotik() {
     }
 
-    public Kotik(int prettiness, int weight, String name, String meow) {this.prettiness = prettiness;
-        this.weight = weight;this.name = name;this.meow = meow;}
+    public Kotik(int prettiness, int weight, String name, String meow) {
+        this.prettiness = prettiness;
+        this.weight = weight;this.name = name;
+        this.meow = meow;
+        hunger = 5;
+        isHunger = false;
+    }
 
 
     void setKotik(int prettiness, String name, int weight, String meow) {
@@ -56,13 +64,119 @@ public class Kotik {
         this.weight = weight;
         this.name = name;
         this.meow = meow;
+        hunger = 5;
+        isHunger = false;
     }
 
-    int giveMeMoney() {
+    //У котика не может быть денег
+    /*int giveMeMoney() {
         return 100;
     }
+    */
 
     void sayMeow() {
         System.out.println(name + " говорит " + meow);
+    }
+
+    /**
+     * Добаыленные методы здесь    |
+     *                            \/
+     */
+
+    public static void main(String[] args) {
+        new Kotik(3, 4, "Мурзик", "Мяу").liveAnotherDay();
+    }
+
+    public void liveAnotherDay() {
+        for (int i = 0; i < 24; i++) {
+            int random = (int) (Math.random() * 5) + 1;
+            switch (random) {
+                case 1:
+                    sleep();
+                    break;
+                case 2:
+                    play();
+                    break;
+                case 3:
+                    chaseMouse();
+                    break;
+                case 4:
+                    purr();
+                    break;
+                case 5:
+                    wash();
+                    break;
+            }
+            if (isHunger) {
+                eat();
+                isHunger = false;
+            }
+        }
+    }
+
+    public void eat() {
+        int randomHunger = (int) (Math.random() * 3 + 1);
+        int randomFood = (int)(Math.random() * 3);
+        System.out.println(name + " ест " + foods[randomFood]);
+        eat(randomHunger, foods[randomFood]);
+    }
+
+    public void eat(int hunger) {
+        this.hunger += hunger;
+    }
+
+    private void eat(int hunger, String food) {
+        this.hunger += hunger;
+
+    }
+
+    private void sleep() {
+        if(hunger > 0) {
+            System.out.println(name + " спит");
+            hunger -= 1;
+        } else {
+            System.out.println(name + " голоден");
+            isHunger = true;
+        }
+    }
+
+    private void play() {
+        if(hunger > 0) {
+            System.out.println(name + " играет");
+            hunger -= 1;
+        } else {
+            System.out.println(name + " голоден");
+            isHunger = true;
+        }
+    }
+
+    private void chaseMouse() {
+        if(hunger > 0) {
+            System.out.println(name + " ловит мышку");
+            hunger -= 1;
+        } else {
+            System.out.println(name + " голоден");
+            isHunger = true;
+        }
+    }
+
+    private void purr() {
+        if(hunger > 0) {
+            System.out.println(name + " мурчит");
+            hunger -= 1;
+        } else {
+            System.out.println(name + " голоден");
+            isHunger = true;
+        }
+    }
+
+    private void wash() {
+        if(hunger > 0) {
+            System.out.println(name + " моется");
+            hunger -= 1;
+        } else {
+            System.out.println(name + " голоден");
+            isHunger = true;
+        }
     }
 }
